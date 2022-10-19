@@ -25,10 +25,8 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date_string", (req, res) => {
   const dateString = req.params.date_string;
-  let date;
-  if (dateString.includes("-")) {
-    date = new Date(dateString);
-  } else {
+  let date = new Date(dateString);
+  if (date == "Invalid Date") {
     date = new Date(parseInt(dateString));
   }
   res.json({
