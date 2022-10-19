@@ -25,6 +25,13 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date_string", (req, res) => {
   const dateString = req.params.date_string;
+  // if dateString is empty return current time
+  if (dateString === "") {
+    const date = new Date();
+    res.json({ unix: date.getTime(), utc: date.toUTCString() });
+  }
+
+  // else, parse date_string param and return unix and utc
   let date = new Date(dateString);
   if (date == "Invalid Date") {
     date = new Date(parseInt(dateString));
